@@ -33,11 +33,13 @@ import { Card, CardContent } from "@/components/ui/card";
 
 // ─── Logo Component ──────────────────────────────────────────────────────────
 function Logo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
-  const sizes = { sm: "text-xl", md: "text-2xl", lg: "text-4xl" };
+  const heights = { sm: 28, md: 36, lg: 72 };
   return (
-    <span className={`font-extrabold tracking-tight leading-none ${sizes[size]}`} style={{ fontFamily: "'Inter', 'Arial Black', sans-serif", letterSpacing: "-0.02em" }}>
-      <span style={{ color: "#ffffff" }}>DEV</span><span style={{ color: "#4169E1" }}>TEAM</span>
-    </span>
+    <img
+      src="/logo.png"
+      alt="DEVTEAM"
+      style={{ height: heights[size], width: "auto", mixBlendMode: "screen" }}
+    />
   );
 }
 
@@ -438,7 +440,9 @@ function Home() {
       <section id="about" className="py-24 px-6 bg-secondary relative overflow-hidden">
         <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-8">{t.why.title}</h2>
+            <div className="mb-8">
+              <img src="/logo.png" alt="DEVTEAM" style={{ height: 60, width: "auto", mixBlendMode: "screen" }} />
+            </div>
             <div className="space-y-8">
               {t.why.points.map((point, i) => (
                 <div key={i} className="flex gap-4">
