@@ -76,7 +76,7 @@ export const translations = {
       phone: "Phone",
       message: "Message",
       submit: "Send Message",
-      info: "Or reach us directly at info@deteam.lv"
+      info: "Or reach us directly at info@devteam.lv"
     },
     footer: {
       copyright: "© 2024 DETEAM. All rights reserved."
@@ -159,7 +159,7 @@ export const translations = {
       phone: "Tālrunis",
       message: "Ziņa",
       submit: "Sūtīt ziņu",
-      info: "Vai sazinieties tieši: info@deteam.lv"
+      info: "Vai sazinieties tieši: info@devteam.lv"
     },
     footer: {
       copyright: "© 2024 DETEAM. Visas tiesības aizsargātas."

@@ -404,7 +404,7 @@ function Home() {
               <div className="space-y-6 text-muted-foreground">
                 <div className="flex items-center gap-4">
                   <Mail className="w-6 h-6 text-primary" />
-                  <span className="text-lg">hello@deteam.lv</span>
+                  <span className="text-lg">info@devteam.lv</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-6 h-6 flex items-center justify-center bg-primary rounded-full text-white text-xs font-bold">LV</div>
