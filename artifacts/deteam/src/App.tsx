@@ -180,7 +180,7 @@ function SplashScreen({ onDone }: { onDone: () => void }) {
             boxShadow: "0 0 60px rgba(65,105,225,0.4), 0 0 120px rgba(65,105,225,0.15)",
           }}
         >
-          <img src="/deteam-logo.jpg" alt="DETEAM" className="h-20 object-contain" />
+          <img src="/deteam-logo.jpg" alt="DEVTEAM" className="h-20 object-contain" />
         </div>
 
         <motion.p
@@ -279,7 +279,7 @@ function Home() {
         <div className="container mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollTo("hero")}>
             <div style={{ background: 'white', padding: '4px 12px', borderRadius: '4px' }} className="flex items-center">
-              <img src="/deteam-logo.jpg" alt="DETEAM" className="h-6 object-contain" />
+              <img src="/deteam-logo.jpg" alt="DEVTEAM" className="h-6 object-contain" />
             </div>
           </div>
           
@@ -433,7 +433,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Why DETEAM / Differentiators */}
+      {/* Why DEVTEAM / Differentiators */}
       <section id="about" className="py-24 px-6 bg-secondary relative overflow-hidden">
         <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -570,7 +570,7 @@ function Home() {
       <footer className="bg-background border-t border-border py-12 px-6">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div style={{ background: 'white', padding: '4px 12px', borderRadius: '4px' }} className="inline-block">
-            <img src="/deteam-logo.jpg" alt="DETEAM" className="h-6 object-contain" />
+            <img src="/deteam-logo.jpg" alt="DEVTEAM" className="h-6 object-contain" />
           </div>
           
           <div className="text-muted-foreground text-sm">

@@ -33,7 +33,7 @@ export const translations = {
       analytics: { title: "Analytics & Reporting", desc: "Clear, actionable data to drive decisions." }
     },
     why: {
-      title: "Why DETEAM?",
+      title: "Why DEVTEAM?",
       points: [
         { title: "Metric-Obsessed", desc: "We don't guess. Every decision is backed by hard data." },
         { title: "European Reach", desc: "Local expertise with a continental footprint." },
@@ -79,7 +79,7 @@ export const translations = {
       info: "Or reach us directly at info@devteam.lv"
     },
     footer: {
-      copyright: "© 2024 DETEAM. All rights reserved."
+      copyright: "© 2024 DEVTEAM. All rights reserved."
     }
   },
   lv: {
@@ -116,7 +116,7 @@ export const translations = {
       analytics: { title: "Analītika un Atskaites", desc: "Skaidri, izmantojami dati lēmumu pieņemšanai." }
     },
     why: {
-      title: "Kāpēc DETEAM?",
+      title: "Kāpēc DEVTEAM?",
       points: [
         { title: "Orientēti uz Metrikām", desc: "Mēs neminām. Katrs lēmums ir balstīts uz reāliem datiem." },
         { title: "Eiropas Mērogs", desc: "Vietējā ekspertīze ar kontinentālu tvērienu." },
@@ -162,7 +162,7 @@ export const translations = {
       info: "Vai sazinieties tieši: info@devteam.lv"
     },
     footer: {
-      copyright: "© 2024 DETEAM. Visas tiesības aizsargātas."
+      copyright: "© 2024 DEVTEAM. Visas tiesības aizsargātas."
     }
   }
 };
