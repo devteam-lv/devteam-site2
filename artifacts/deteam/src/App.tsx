@@ -32,69 +32,211 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Card, CardContent } from "@/components/ui/card";
 
 // ─── Splash Screen ───────────────────────────────────────────────────────────
+function DataCanvas() {
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animId: number;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    // Nodes
+    const NODE_COUNT = 55;
+    type Node = { x: number; y: number; vx: number; vy: number; r: number; opacity: number };
+    const nodes: Node[] = Array.from({ length: NODE_COUNT }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      r: Math.random() * 2.5 + 1,
+      opacity: Math.random() * 0.6 + 0.3,
+    }));
+
+    // Falling data streams
+    type Stream = { x: number; y: number; speed: number; chars: string[]; opacity: number };
+    const CHARS = "01アイウエオカキクデジタル∑∆∇⟨⟩";
+    const streams: Stream[] = Array.from({ length: 28 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight - window.innerHeight,
+      speed: Math.random() * 1.2 + 0.4,
+      chars: Array.from({ length: Math.floor(Math.random() * 10 + 5) }, () =>
+        CHARS[Math.floor(Math.random() * CHARS.length)]
+      ),
+      opacity: Math.random() * 0.18 + 0.06,
+    }));
+
+    let t = 0;
+    const draw = () => {
+      t++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw streams
+      streams.forEach((s) => {
+        s.y += s.speed;
+        if (s.y > canvas.height + 200) {
+          s.y = -200;
+          s.x = Math.random() * canvas.width;
+        }
+        if (t % 18 === 0) s.chars = s.chars.map(() => CHARS[Math.floor(Math.random() * CHARS.length)]);
+        s.chars.forEach((ch, i) => {
+          const alpha = s.opacity * (1 - i / s.chars.length);
+          ctx.fillStyle = `rgba(65, 105, 225, ${alpha})`;
+          ctx.font = `${10 + i % 3}px monospace`;
+          ctx.fillText(ch, s.x, s.y - i * 14);
+        });
+      });
+
+      // Move & draw nodes
+      nodes.forEach((n) => {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+        const pulse = 0.5 + 0.5 * Math.sin(t * 0.03 + n.x);
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(65, 105, 225, ${n.opacity * pulse})`;
+        ctx.fill();
+      });
+
+      // Draw connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 140) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(65, 105, 225, ${0.18 * (1 - dist / 140)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animId = requestAnimationFrame(draw);
+    };
+    draw();
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
+}
+
 function SplashScreen({ onDone }: { onDone: () => void }) {
   useEffect(() => {
-    const t = setTimeout(onDone, 2800);
+    const t = setTimeout(onDone, 3200);
     return () => clearTimeout(t);
   }, [onDone]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background overflow-hidden"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#060810] overflow-hidden"
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.7, ease: "easeInOut" }}
+      exit={{ opacity: 0, scale: 1.04 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
     >
-      {/* Background glow */}
-      <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(65,105,225,0.18) 0%, transparent 70%)" }}
-        initial={{ scale: 0.6, opacity: 0 }}
-        animate={{ scale: 1.2, opacity: 1 }}
-        transition={{ duration: 1.8, ease: "easeOut" }}
+      {/* Animated canvas background */}
+      <DataCanvas />
+
+      {/* Central glow */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          width: 520,
+          height: 520,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(65,105,225,0.22) 0%, transparent 70%)",
+        }}
       />
 
-      {/* Logo */}
+      {/* Logo card */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.85, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10"
+        className="relative z-10 flex flex-col items-center"
+        initial={{ opacity: 0, y: 30, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div style={{ background: "white", padding: "10px 28px", borderRadius: "8px" }}>
-          <img src="/deteam-logo.jpg" alt="DETEAM" className="h-16 object-contain" />
+        <div
+          style={{
+            background: "white",
+            padding: "14px 36px",
+            borderRadius: "10px",
+            boxShadow: "0 0 60px rgba(65,105,225,0.4), 0 0 120px rgba(65,105,225,0.15)",
+          }}
+        >
+          <img src="/deteam-logo.jpg" alt="DETEAM" className="h-20 object-contain" />
         </div>
+
+        <motion.p
+          className="mt-5 text-xs tracking-[0.35em] uppercase text-blue-400/70 font-light"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+        >
+          Digital Growth Agency
+        </motion.p>
+
+        {/* Scan line under logo */}
+        <motion.div
+          className="mt-6 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
+          style={{ width: 320 }}
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
+        />
       </motion.div>
 
-      {/* Tagline */}
-      <motion.p
-        className="mt-6 text-sm tracking-[0.25em] uppercase text-muted-foreground relative z-10"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.7 }}
-      >
-        Digital Growth Agency
-      </motion.p>
+      {/* Corner brackets */}
+      {[
+        "top-8 left-8 border-t-2 border-l-2",
+        "top-8 right-8 border-t-2 border-r-2",
+        "bottom-8 left-8 border-b-2 border-l-2",
+        "bottom-8 right-8 border-b-2 border-r-2",
+      ].map((cls, i) => (
+        <motion.div
+          key={i}
+          className={`absolute w-8 h-8 border-primary/40 ${cls}`}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 + i * 0.08 }}
+        />
+      ))}
 
       {/* Progress bar */}
       <motion.div
-        className="absolute bottom-0 left-0 h-[3px] bg-primary"
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-primary via-blue-400 to-primary"
         initial={{ width: "0%" }}
         animate={{ width: "100%" }}
-        transition={{ duration: 2.5, ease: "linear", delay: 0.1 }}
+        transition={{ duration: 3.0, ease: "linear", delay: 0.1 }}
       />
 
-      {/* Thin horizontal lines (decorative) */}
-      {["-translate-y-32", "translate-y-32"].map((cls, i) => (
-        <motion.div
-          key={i}
-          className={`absolute left-0 right-0 h-px bg-primary/10 ${cls}`}
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 + i * 0.15 }}
-        />
-      ))}
+      {/* Bottom status text */}
+      <motion.div
+        className="absolute bottom-6 left-0 right-0 flex justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+      >
+        <span className="text-[10px] tracking-[0.3em] uppercase text-primary/40 font-mono">
+          Initializing...
+        </span>
+      </motion.div>
     </motion.div>
   );
 }
