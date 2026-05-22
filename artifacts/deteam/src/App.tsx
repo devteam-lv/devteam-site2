@@ -3,7 +3,7 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { translations } from "@/lib/translations";
 import { 
   BarChart, 
@@ -31,7 +31,77 @@ import { Textarea } from "@/components/ui/textarea";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
 
+// ─── Splash Screen ───────────────────────────────────────────────────────────
+function SplashScreen({ onDone }: { onDone: () => void }) {
+  useEffect(() => {
+    const t = setTimeout(onDone, 2800);
+    return () => clearTimeout(t);
+  }, [onDone]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background overflow-hidden"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+    >
+      {/* Background glow */}
+      <motion.div
+        className="absolute w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(65,105,225,0.18) 0%, transparent 70%)" }}
+        initial={{ scale: 0.6, opacity: 0 }}
+        animate={{ scale: 1.2, opacity: 1 }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
+      />
+
+      {/* Logo */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10"
+      >
+        <div style={{ background: "white", padding: "10px 28px", borderRadius: "8px" }}>
+          <img src="/deteam-logo.jpg" alt="DETEAM" className="h-16 object-contain" />
+        </div>
+      </motion.div>
+
+      {/* Tagline */}
+      <motion.p
+        className="mt-6 text-sm tracking-[0.25em] uppercase text-muted-foreground relative z-10"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+      >
+        Digital Growth Agency
+      </motion.p>
+
+      {/* Progress bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 h-[3px] bg-primary"
+        initial={{ width: "0%" }}
+        animate={{ width: "100%" }}
+        transition={{ duration: 2.5, ease: "linear", delay: 0.1 }}
+      />
+
+      {/* Thin horizontal lines (decorative) */}
+      {["-translate-y-32", "translate-y-32"].map((cls, i) => (
+        <motion.div
+          key={i}
+          className={`absolute left-0 right-0 h-px bg-primary/10 ${cls}`}
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4 + i * 0.15 }}
+        />
+      ))}
+    </motion.div>
+  );
+}
+
+// ─── Main App ─────────────────────────────────────────────────────────────────
 function Home() {
+  const [splashDone, setSplashDone] = useState(false);
   const [lang, setLang] = useState<"en" | "lv">("lv");
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,6 +125,11 @@ function Home() {
   };
 
   return (
+    <>
+      <AnimatePresence>
+        {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
+      </AnimatePresence>
+
     <div className="min-h-screen w-full bg-background text-foreground font-sans selection:bg-primary selection:text-white">
       
       {/* Navigation */}
@@ -369,6 +444,7 @@ function Home() {
       </footer>
 
     </div>
+    </>
   );
 }
 
