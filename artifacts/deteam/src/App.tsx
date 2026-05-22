@@ -31,6 +31,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
 
+// ─── Logo Component ──────────────────────────────────────────────────────────
+function Logo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
+  const sizes = { sm: "text-xl", md: "text-2xl", lg: "text-4xl" };
+  return (
+    <span className={`font-extrabold tracking-tight leading-none ${sizes[size]}`} style={{ fontFamily: "'Inter', 'Arial Black', sans-serif", letterSpacing: "-0.02em" }}>
+      <span style={{ color: "#ffffff" }}>DEV</span><span style={{ color: "#4169E1" }}>TEAM</span>
+    </span>
+  );
+}
+
 // ─── Splash Screen ───────────────────────────────────────────────────────────
 function DataCanvas() {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -172,15 +182,8 @@ function SplashScreen({ onDone }: { onDone: () => void }) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div
-          style={{
-            background: "white",
-            padding: "14px 36px",
-            borderRadius: "10px",
-            boxShadow: "0 0 60px rgba(65,105,225,0.4), 0 0 120px rgba(65,105,225,0.15)",
-          }}
-        >
-          <img src="/deteam-logo.jpg" alt="DEVTEAM" className="h-20 object-contain" />
+        <div style={{ filter: "drop-shadow(0 0 40px rgba(65,105,225,0.6))" }}>
+          <Logo size="lg" />
         </div>
 
         <motion.p
@@ -278,9 +281,7 @@ function Home() {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm py-4" : "bg-transparent py-6"}`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollTo("hero")}>
-            <div style={{ background: 'white', padding: '4px 12px', borderRadius: '4px' }} className="flex items-center">
-              <img src="/deteam-logo.jpg" alt="DEVTEAM" className="h-6 object-contain" />
-            </div>
+            <Logo size="md" />
           </div>
           
           <div className="hidden md:flex items-center gap-8">
@@ -569,9 +570,7 @@ function Home() {
       {/* Footer */}
       <footer className="bg-background border-t border-border py-12 px-6">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div style={{ background: 'white', padding: '4px 12px', borderRadius: '4px' }} className="inline-block">
-            <img src="/deteam-logo.jpg" alt="DEVTEAM" className="h-6 object-contain" />
-          </div>
+          <Logo size="md" />
           
           <div className="text-muted-foreground text-sm">
             {t.footer.copyright}
