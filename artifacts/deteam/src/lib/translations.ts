@@ -14,14 +14,14 @@ export const translations = {
       secondaryCta: "Learn More"
     },
     stats: {
-      clients: "150+",
-      clientsLabel: "Active Clients",
-      experience: "8+",
-      experienceLabel: "Years Experience",
-      roi: "300%",
-      roiLabel: "Avg. ROI Increase",
-      awards: "12",
-      awardsLabel: "Industry Awards"
+      clients: "15+",
+      clientsLabel: "Certified Specialists",
+      experience: "50+",
+      experienceLabel: "Courses Completed",
+      roi: "10+",
+      roiLabel: "Active Clients",
+      awards: "100%",
+      awardsLabel: "Client Satisfaction"
     },
     services: {
       title: "Our Expertise",
@@ -97,14 +97,14 @@ export const translations = {
       secondaryCta: "Uzzināt vairāk"
     },
     stats: {
-      clients: "150+",
-      clientsLabel: "Aktīvi klienti",
-      experience: "8+",
-      experienceLabel: "Gadu pieredze",
-      roi: "300%",
-      roiLabel: "Vidējais ROI pieaugums",
-      awards: "12",
-      awardsLabel: "Nozares apbalvojumi"
+      clients: "15+",
+      clientsLabel: "Sertificēti speciālisti",
+      experience: "50+",
+      experienceLabel: "Pabeigti kursi",
+      roi: "10+",
+      roiLabel: "Aktīvie klienti",
+      awards: "100%",
+      awardsLabel: "Klientu apmierinātība"
     },
     services: {
       title: "Mūsu Ekspertīze",
