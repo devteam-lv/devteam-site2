@@ -116,10 +116,23 @@ function Home() {
       )}
 
       {/* Hero Section */}
-      <section id="hero" className="pt-32 pb-20 md:pt-48 md:pb-32 px-6 container mx-auto flex flex-col items-center text-center relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 blur-[120px] rounded-full pointer-events-none -z-10" />
+      <section id="hero" className="pt-32 pb-20 md:pt-48 md:pb-32 px-6 flex flex-col items-center text-center relative overflow-hidden">
+        {/* Background image — positioned absolutely, behind content */}
+        <img
+          src="/hero-bg.png?v=2"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+          style={{ opacity: 0.18, zIndex: 0 }}
+        />
+        {/* Dark overlay with bottom fade for seamless transition */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.3) 60%, hsl(222,47%,4%) 100%)", zIndex: 1 }}
+        />
         
         <motion.div
+          style={{ position: "relative", zIndex: 2 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
