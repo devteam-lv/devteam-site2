@@ -79,7 +79,7 @@ export const translations = {
       info: ""
     },
     footer: {
-      copyright: "© 2024 DEVTEAM. All rights reserved."
+      copyright: "© 2025 DEVTEAM. All rights reserved."
     }
   },
   lv: {
@@ -162,7 +162,7 @@ export const translations = {
       info: ""
     },
     footer: {
-      copyright: "© 2024 DEVTEAM. Visas tiesības aizsargātas."
+      copyright: "© 2025 DEVTEAM. Visas tiesības aizsargātas."
     }
   }
 };
