@@ -334,7 +334,7 @@ function Home() {
       )}
 
       {/* Hero Section */}
-      <section id="hero" className="pt-32 pb-20 md:pt-48 md:pb-32 px-6 flex flex-col items-center text-center relative overflow-hidden">
+      <section id="hero" className="min-h-[88vh] md:min-h-0 pt-28 pb-16 md:pt-48 md:pb-32 px-4 sm:px-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
         {/* Background image — positioned absolutely, behind content */}
         <img
           src="/hero-bg.png?v=5"
@@ -354,19 +354,19 @@ function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl"
+          className="max-w-4xl w-full"
         >
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-5 md:mb-6 leading-[1.15] sm:leading-tight">
             {t.hero.title}
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+          <p className="text-base sm:text-xl md:text-2xl text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
             {t.hero.subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8" onClick={() => scrollTo("contact")}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8" onClick={() => scrollTo("contact")}>
               {t.hero.primaryCta} <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border-border hover:bg-secondary" onClick={() => scrollTo("services")}>
+            <Button size="lg" variant="outline" className="w-full sm:w-auto text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 border-border hover:bg-secondary" onClick={() => scrollTo("services")}>
               {t.hero.secondaryCta}
             </Button>
           </div>
@@ -374,8 +374,8 @@ function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 border-y border-border bg-secondary/50">
-        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="py-10 md:py-12 border-y border-border bg-secondary/50">
+        <div className="container mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {[
             { value: t.stats.clients, label: t.stats.clientsLabel },
             { value: t.stats.experience, label: t.stats.experienceLabel },
@@ -398,13 +398,13 @@ function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 px-6 container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.services.title}</h2>
+      <section id="services" className="py-16 md:py-24 px-4 sm:px-6 container mx-auto">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">{t.services.title}</h2>
           <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {[
             { icon: <Search className="w-8 h-8 text-primary" />, ...t.services.seo },
             { icon: <MousePointerClick className="w-8 h-8 text-primary" />, ...t.services.ppc },
@@ -421,12 +421,12 @@ function Home() {
               transition={{ delay: i * 0.1 }}
             >
               <Card className="bg-card border-border hover:border-primary/50 transition-colors h-full">
-                <CardContent className="p-8">
-                  <div className="bg-secondary w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                <CardContent className="p-5 sm:p-6 md:p-8">
+                  <div className="bg-secondary w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 md:mb-6">
                     {service.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{service.desc}</p>
+                  <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">{service.desc}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -435,27 +435,27 @@ function Home() {
       </section>
 
       {/* Why DEVTEAM / Differentiators */}
-      <section id="about" className="py-24 px-6 bg-secondary relative overflow-hidden">
-        <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <section id="about" className="py-16 md:py-24 px-4 sm:px-6 bg-secondary relative overflow-hidden">
+        <div className="container mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div>
-            <div className="mb-8">
-              <img src="/logo.png" alt="DEVTEAM" style={{ height: 60, width: "auto", mixBlendMode: "screen" }} />
+            <div className="mb-6 md:mb-8">
+              <img src="/logo.png" alt="DEVTEAM" style={{ height: 50, width: "auto", mixBlendMode: "screen" }} />
             </div>
-            <div className="space-y-8">
+            <div className="space-y-6 md:space-y-8">
               {t.why.points.map((point, i) => (
-                <div key={i} className="flex gap-4">
+                <div key={i} className="flex gap-3 md:gap-4">
                   <div className="mt-1 flex-shrink-0">
-                    <CheckCircle2 className="w-6 h-6 text-primary" />
+                    <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold mb-2">{point.title}</h4>
-                    <p className="text-muted-foreground text-lg">{point.desc}</p>
+                    <h4 className="text-base md:text-xl font-bold mb-1 md:mb-2">{point.title}</h4>
+                    <p className="text-muted-foreground text-sm md:text-lg">{point.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="relative">
+          <div className="relative hidden md:block">
             <div className="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 w-full scale-110 blur-3xl" />
             <img 
               src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
@@ -467,35 +467,37 @@ function Home() {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 px-6 container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.process.title}</h2>
+      <section className="py-16 md:py-24 px-4 sm:px-6 container mx-auto">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">{t.process.title}</h2>
           <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
         </div>
         
-        <div className="flex flex-col md:flex-row justify-between items-start relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-0 md:flex md:flex-row md:justify-between md:items-start relative">
           <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-secondary -z-10" />
           {t.process.steps.map((step, i) => (
-            <div key={i} className="flex flex-col items-center text-center w-full md:w-1/5 mb-10 md:mb-0 relative group">
-              <div className="w-24 h-24 rounded-full bg-card border-4 border-background flex items-center justify-center text-2xl font-bold text-primary mb-6 shadow-xl group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 relative z-10">
+            <div key={i} className="flex sm:flex-col items-center sm:items-center text-left sm:text-center gap-4 sm:gap-0 w-full md:w-1/5 relative group">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex-shrink-0 rounded-full bg-card border-4 border-background flex items-center justify-center text-xl md:text-2xl font-bold text-primary sm:mb-4 md:mb-6 shadow-xl group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 relative z-10">
                 0{i + 1}
               </div>
-              <h4 className="text-xl font-bold mb-2">{step.title}</h4>
-              <p className="text-sm text-muted-foreground max-w-[200px]">{step.desc}</p>
+              <div>
+                <h4 className="text-base md:text-xl font-bold mb-1 md:mb-2">{step.title}</h4>
+                <p className="text-sm text-muted-foreground md:max-w-[200px] md:text-center">{step.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Results / Case Studies */}
-      <section id="results" className="py-24 px-6 bg-card border-y border-border">
+      <section id="results" className="py-16 md:py-24 px-4 sm:px-6 bg-card border-y border-border">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.results.title}</h2>
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">{t.results.title}</h2>
             <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
             {t.results.cases.map((c, i) => (
               <Card key={i} className="bg-background border-border overflow-hidden group">
                 <CardContent className="p-0">
@@ -515,9 +517,9 @@ function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 px-6 container mx-auto max-w-3xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.faq.title}</h2>
+      <section className="py-16 md:py-24 px-4 sm:px-6 container mx-auto max-w-3xl">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">{t.faq.title}</h2>
           <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
         </div>
         
@@ -539,12 +541,12 @@ function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6 bg-primary/5 relative overflow-hidden">
-        <div className="container mx-auto max-w-5xl bg-card border border-border rounded-3xl p-8 md:p-16 shadow-2xl relative z-10">
-          <div className="grid md:grid-cols-2 gap-16">
+      <section id="contact" className="py-16 md:py-24 px-4 sm:px-6 bg-primary/5 relative overflow-hidden">
+        <div className="container mx-auto max-w-5xl bg-card border border-border rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-16 shadow-2xl relative z-10">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">{t.contact.title}</h2>
-              <p className="text-xl text-muted-foreground mb-8">{t.contact.info}</p>
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 md:mb-6">{t.contact.title}</h2>
+              <p className="text-base md:text-xl text-muted-foreground mb-6 md:mb-8">{t.contact.info}</p>
               
               <div className="space-y-6 text-muted-foreground">
                 <div className="flex items-center gap-4">
