@@ -10,7 +10,7 @@ export const translations = {
     hero: {
       title: "Data-Driven Digital Growth",
       subtitle: "We build precise, high-performance SEO, PPC, and web strategies for ambitious European businesses.",
-      primaryCta: "Get Free Audit",
+      primaryCta: "Contact Us",
       secondaryCta: "Learn More"
     },
     stats: {
@@ -93,7 +93,7 @@ export const translations = {
     hero: {
       title: "Uz Datiem Balstīta Digitālā Izaugsme",
       subtitle: "Mēs veidojam precīzas, augstas veiktspējas SEO, PPC un tīmekļa stratēģijas ambicioziem uzņēmumiem.",
-      primaryCta: "Iegūt bezmaksas auditu",
+      primaryCta: "Sazināties ar mums",
       secondaryCta: "Uzzināt vairāk"
     },
     stats: {
