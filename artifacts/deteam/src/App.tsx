@@ -339,11 +339,11 @@ function Home() {
       <section id="hero" className="pt-32 pb-20 md:pt-48 md:pb-32 px-6 flex flex-col items-center text-center relative overflow-hidden">
         {/* Background image — positioned absolutely, behind content */}
         <img
-          src="/hero-bg.png?v=3"
+          src="/hero-bg.png?v=4"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-          style={{ opacity: 0.18, zIndex: 0 }}
+          style={{ opacity: 0.35, zIndex: 0 }}
         />
         {/* Dark overlay with bottom fade for seamless transition */}
         <div
