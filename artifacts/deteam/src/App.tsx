@@ -288,6 +288,7 @@ function Home() {
             <button onClick={() => scrollTo("services")} className="text-sm font-medium hover:text-primary transition-colors">{t.nav.services}</button>
             <button onClick={() => scrollTo("about")} className="text-sm font-medium hover:text-primary transition-colors">{t.nav.about}</button>
             <button onClick={() => scrollTo("results")} className="text-sm font-medium hover:text-primary transition-colors">{t.nav.results}</button>
+            <button onClick={() => scrollTo("blog")} className="text-sm font-medium hover:text-primary transition-colors">{t.nav.blog}</button>
             <button onClick={() => scrollTo("contact")} className="text-sm font-medium hover:text-primary transition-colors">{t.nav.contact}</button>
             
             <div className="flex items-center gap-1 bg-secondary rounded-full p-1 border border-border">
@@ -320,6 +321,7 @@ function Home() {
           <button onClick={() => scrollTo("services")} className="text-xl font-medium text-left">{t.nav.services}</button>
           <button onClick={() => scrollTo("about")} className="text-xl font-medium text-left">{t.nav.about}</button>
           <button onClick={() => scrollTo("results")} className="text-xl font-medium text-left">{t.nav.results}</button>
+          <button onClick={() => scrollTo("blog")} className="text-xl font-medium text-left">{t.nav.blog}</button>
           <button onClick={() => scrollTo("contact")} className="text-xl font-medium text-left">{t.nav.contact}</button>
           
           <div className="flex items-center gap-4 mt-4">
@@ -356,8 +358,9 @@ function Home() {
           transition={{ duration: 0.6 }}
           className="max-w-4xl w-full"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-5 md:mb-6 leading-[1.15] sm:leading-tight">
-            {t.hero.title}
+          <p className="text-xs sm:text-sm font-medium tracking-widest text-primary uppercase mb-4 md:mb-6">{t.hero.tagline}</p>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-5 md:mb-6 leading-[1.1]">
+            {t.hero.title.split("\n").map((line, i) => <span key={i} className="block">{line}</span>)}
           </h1>
           <p className="text-base sm:text-xl md:text-2xl text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
             {t.hero.subtitle}
@@ -367,41 +370,50 @@ function Home() {
               {t.hero.primaryCta} <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 border-border hover:bg-secondary" onClick={() => scrollTo("services")}>
-              {t.hero.secondaryCta}
+              {t.hero.secondaryCta} <ChevronDown className="ml-2 w-5 h-5" />
             </Button>
           </div>
         </motion.div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-10 md:py-12 border-y border-border bg-secondary/50">
-        <div className="container mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          {[
-            { value: t.stats.clients, label: t.stats.clientsLabel },
-            { value: t.stats.experience, label: t.stats.experienceLabel },
-            { value: t.stats.roi, label: t.stats.roiLabel },
-            { value: t.stats.awards, label: t.stats.awardsLabel }
-          ].map((stat, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="text-center"
-            >
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.value}</div>
-              <div className="text-sm md:text-base text-muted-foreground font-medium uppercase tracking-wider">{stat.label}</div>
-            </motion.div>
-          ))}
+      <section className="py-12 md:py-16 border-y border-border bg-secondary/50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 md:mb-10">
+            <p className="text-xs font-bold tracking-widest text-primary uppercase mb-2">{t.statsSection.label}</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
+              {t.statsSection.title.split("\n").map((line, i) => <span key={i} className="block">{line}</span>)}
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {[
+              { value: t.stats.clients, label: t.stats.clientsLabel },
+              { value: t.stats.experience, label: t.stats.experienceLabel },
+              { value: t.stats.roi, label: t.stats.roiLabel },
+              { value: t.stats.awards, label: t.stats.awardsLabel }
+            ].map((stat, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-sm md:text-base text-muted-foreground font-medium uppercase tracking-wider">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Services Section */}
       <section id="services" className="py-16 md:py-24 px-4 sm:px-6 container mx-auto">
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">{t.services.title}</h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <p className="text-xs font-bold tracking-widest text-primary uppercase mb-3">{t.services.label}</p>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-4">{t.services.title}</h2>
+          <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto">{t.services.subtitle}</p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -438,9 +450,10 @@ function Home() {
       <section id="about" className="py-16 md:py-24 px-4 sm:px-6 bg-secondary relative overflow-hidden">
         <div className="container mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div>
-            <div className="mb-6 md:mb-8">
-              <img src="/logo.png" alt="DEVTEAM" style={{ height: 50, width: "auto", mixBlendMode: "screen" }} />
-            </div>
+            <p className="text-xs font-bold tracking-widest text-primary uppercase mb-3">{t.why.label}</p>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6 md:mb-8 leading-tight">
+              {t.why.title.split("\n").map((line, i) => <span key={i} className="block">{line}</span>)}
+            </h2>
             <div className="space-y-6 md:space-y-8">
               {t.why.points.map((point, i) => (
                 <div key={i} className="flex gap-3 md:gap-4">
@@ -469,8 +482,8 @@ function Home() {
       {/* Process Section */}
       <section className="py-16 md:py-24 px-4 sm:px-6 container mx-auto">
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">{t.process.title}</h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <p className="text-xs font-bold tracking-widest text-primary uppercase mb-3">{t.process.label}</p>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-4">{t.process.title}</h2>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-0 md:flex md:flex-row md:justify-between md:items-start relative">
@@ -492,22 +505,25 @@ function Home() {
       {/* Results / Case Studies */}
       <section id="results" className="py-16 md:py-24 px-4 sm:px-6 bg-card border-y border-border">
         <div className="container mx-auto">
-          <div className="text-center mb-10 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">{t.results.title}</h2>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <div className="text-center mb-4 md:mb-6">
+            <p className="text-xs font-bold tracking-widest text-primary uppercase mb-3">{t.results.label}</p>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-4">{t.results.title}</h2>
+            <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto mb-10 md:mb-16">{t.results.subtitle}</p>
           </div>
           
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
             {t.results.cases.map((c, i) => (
               <Card key={i} className="bg-background border-border overflow-hidden group">
                 <CardContent className="p-0">
-                  <div className="h-32 bg-secondary flex items-center justify-center border-b border-border">
-                    <BarChart className="w-12 h-12 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <div className="px-6 pt-6 pb-4 border-b border-border flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{c.client}</span>
+                    <span className="text-xs font-bold px-2 py-1 rounded bg-primary/10 text-primary border border-primary/20">{c.tag}</span>
                   </div>
-                  <div className="p-8 text-center">
-                    <div className="text-4xl font-extrabold text-primary mb-2">{c.metric}</div>
-                    <div className="text-sm font-medium uppercase tracking-wider text-muted-foreground mb-4">{c.metricLabel}</div>
-                    <div className="text-lg font-bold border-t border-border pt-4">{c.client}</div>
+                  <div className="p-6">
+                    <div className="text-5xl font-extrabold text-primary mb-1">{c.metric}</div>
+                    <div className="text-sm font-semibold text-foreground mb-3">{c.metricLabel}</div>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{c.desc}</p>
+                    <p className="text-xs text-muted-foreground/60 italic">{c.note}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -516,19 +532,55 @@ function Home() {
         </div>
       </section>
 
+      {/* Blog Section */}
+      <section id="blog" className="py-16 md:py-24 px-4 sm:px-6 bg-secondary/30">
+        <div className="container mx-auto">
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-xs font-bold tracking-widest text-primary uppercase mb-3">{t.blog.label}</p>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-4">{t.blog.title}</h2>
+            <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto">{t.blog.subtitle}</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+            {t.blog.posts.map((post, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Card className="bg-card border-border hover:border-primary/50 transition-all h-full group cursor-pointer">
+                  <CardContent className="p-5 md:p-6 flex flex-col h-full">
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="text-xs font-bold px-2 py-1 rounded bg-primary/10 text-primary border border-primary/20 uppercase tracking-wide">{post.tag}</span>
+                      <span className="text-xs text-muted-foreground">{post.date}</span>
+                    </div>
+                    <h3 className="text-base font-bold mb-3 leading-snug group-hover:text-primary transition-colors flex-1">{post.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.desc}</p>
+                    <span className="text-sm font-semibold text-primary flex items-center gap-1 mt-auto">
+                      {post.cta} <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-16 md:py-24 px-4 sm:px-6 container mx-auto max-w-3xl">
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">{t.faq.title}</h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <p className="text-xs font-bold tracking-widest text-primary uppercase mb-3">{t.faq.label}</p>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-4">{t.faq.title}</h2>
         </div>
         
         <Accordion type="single" collapsible className="w-full space-y-4">
-          {[1, 2, 3, 4].map((num) => {
-            const key = num as 1|2|3|4;
+          {[1, 2, 3, 4, 5].map((num) => {
+            const key = num as 1|2|3|4|5;
             return (
               <AccordionItem key={num} value={`item-${num}`} className="bg-card border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left text-lg font-bold hover:no-underline hover:text-primary py-6">
+                <AccordionTrigger className="text-left text-base md:text-lg font-bold hover:no-underline hover:text-primary py-6">
                   {t.faq[`q${key}` as keyof typeof t.faq]}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground text-base pb-6 leading-relaxed">
@@ -545,17 +597,22 @@ function Home() {
         <div className="container mx-auto max-w-5xl bg-card border border-border rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-16 shadow-2xl relative z-10">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16">
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 md:mb-6">{t.contact.title}</h2>
-              <p className="text-base md:text-xl text-muted-foreground mb-6 md:mb-8">{t.contact.info}</p>
+              <p className="text-xs font-bold tracking-widest text-primary uppercase mb-3">{t.contact.label}</p>
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-4 md:mb-6">{t.contact.title}</h2>
+              <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8">{t.contact.subtitle}</p>
               
-              <div className="space-y-6 text-muted-foreground">
+              <div className="space-y-4 text-muted-foreground">
                 <div className="flex items-center gap-4">
-                  <Mail className="w-6 h-6 text-primary" />
-                  <span className="text-lg">info@devteam.lv</span>
+                  <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+                  <span>info@devteam.lv</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-6 h-6 flex items-center justify-center bg-primary rounded-full text-white text-xs font-bold">LV</div>
-                  <span className="text-lg">Riga, Latvia</span>
+                  <div className="w-5 h-5 flex items-center justify-center bg-primary rounded-full text-white text-[10px] font-bold flex-shrink-0">LV</div>
+                  <span>Riga, Latvia — remote-first</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-5 h-5 flex items-center justify-center border border-primary/40 rounded text-primary text-[10px] font-bold flex-shrink-0">W</div>
+                  <span>{t.contact.whatsapp}</span>
                 </div>
               </div>
             </div>
@@ -564,7 +621,7 @@ function Home() {
               <Input placeholder={t.contact.name} className="h-14 bg-background border-border" />
               <Input type="email" placeholder={t.contact.email} className="h-14 bg-background border-border" />
               <Input type="tel" placeholder={t.contact.phone} className="h-14 bg-background border-border" />
-              <Textarea placeholder={t.contact.message} className="min-h-[120px] bg-background border-border resize-none" />
+              <Textarea placeholder={t.contact.message} className="min-h-[140px] bg-background border-border resize-none" />
               <Button type="submit" size="lg" className="w-full h-14 text-lg mt-4">{t.contact.submit}</Button>
             </form>
           </div>
@@ -572,9 +629,12 @@ function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-background border-t border-border py-12 px-6">
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <Logo size="md" />
+      <footer className="bg-background border-t border-border py-10 px-4 sm:px-6">
+        <div className="container mx-auto flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left">
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <Logo size="md" />
+            <p className="text-xs text-muted-foreground tracking-widest uppercase">{t.footer.tagline}</p>
+          </div>
           
           <div className="text-muted-foreground text-sm">
             {t.footer.copyright}
